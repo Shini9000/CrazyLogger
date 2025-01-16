@@ -7,17 +7,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class CrazyLogger extends JavaPlugin implements Listener {
 
@@ -34,54 +30,58 @@ public class CrazyLogger extends JavaPlugin implements Listener {
         saveDefaultConfig();
     }
 
-    @EventHandler
-    public void inventoryClick(InventoryClickEvent e) {
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "CrazyLogger")) {
-            e.setCancelled(true);
-            Bukkit.getServer().broadcastMessage("click event worked");
 
-            if (e.getCurrentItem() != null && e.getCurrentItem().getType().equals(Material.COAL)) {
-                e.getWhoClicked().closeInventory();
 
-                Inventory gui2 = getServer().createInventory(null, 54, ChatColor.RED + "CrazyLogger Page 2");
-                ItemStack coal = new ItemStack(Material.COAL, 1);
-                gui2.addItem(coal);
-                e.getWhoClicked().openInventory(gui2);
-
-                counter = 0;
-                Player player = (Player) e.getWhoClicked();
-                ConfigurationSection configSection = getConfig().getConfigurationSection("Data." + player.getName().toLowerCase() + "." + "info");
-
-                Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
-                    if (configSection != null) {
-                        List<ItemStack> itemsToAdd = new ArrayList<>();
-                        for (String key : configSection.getKeys(false)) {
-                            counter++;
-                            if (counter > 64) {
-                                String format1 = configSection.getString(key);
-                                String format2 = format1.replace("Crate:", "C:");
-                                String format3 = format2.replace("Reward:", "R:");
-
-                                ItemStack book = new ItemStack(Material.BOOK, 1);
-                                ItemMeta itemM = book.getItemMeta();
-                                itemM.setLore(Arrays.asList(format3));
-                                itemM.setDisplayName(key);
-
-                                book.setItemMeta(itemM);
-                                itemsToAdd.add(book);
-                            }
-                        }
-
-                        Bukkit.getScheduler().runTask(this, () -> {
-                            for (ItemStack item : itemsToAdd) {
-                                gui2.addItem(item);
-                            }
-                        });
-                    }
-                });
-            }
-        }
-    }
+    // THIS IS USELESS THERE IS NO MENU WITH THIS NAME
+    // OLD CODE????
+//    @EventHandler
+//    public void inventoryClick(InventoryClickEvent e) {
+//        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "CrazyLogger")) {
+//            //e.setCancelled(true);
+//            Bukkit.getServer().broadcastMessage("click event worked");
+//
+//            if (e.getCurrentItem() != null && e.getCurrentItem().getType().equals(Material.COAL)) {
+//                e.getWhoClicked().closeInventory();
+//
+//                Inventory gui2 = getServer().createInventory(null, 54, ChatColor.RED + "CrazyLogger Page 2");
+//                ItemStack coal = new ItemStack(Material.COAL, 1);
+//                gui2.addItem(coal);
+//                e.getWhoClicked().openInventory(gui2);
+//
+//                counter = 0;
+//                Player player = (Player) e.getWhoClicked();
+//                ConfigurationSection configSection = getConfig().getConfigurationSection("Data." + player.getName().toLowerCase() + "." + "info");
+//
+//                Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+//                    if (configSection != null) {
+//                        List<ItemStack> itemsToAdd = new ArrayList<>();
+//                        for (String key : configSection.getKeys(false)) {
+//                            counter++;
+//                            if (counter > 64) {
+//                                String format1 = configSection.getString(key);
+//                                String format2 = format1.replace("Crate:", "C:");
+//                                String format3 = format2.replace("Reward:", "R:");
+//
+//                                ItemStack book = new ItemStack(Material.BOOK, 1);
+//                                ItemMeta itemM = book.getItemMeta();
+//                                itemM.setLore(Arrays.asList(format3));
+//                                itemM.setDisplayName(key);
+//
+//                                book.setItemMeta(itemM);
+//                                itemsToAdd.add(book);
+//                            }
+//                        }
+//
+//                        Bukkit.getScheduler().runTask(this, () -> {
+//                            for (ItemStack item : itemsToAdd) {
+//                                gui2.addItem(item);
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        }
+//    }
 
 
     @Override
@@ -124,7 +124,6 @@ public class CrazyLogger extends JavaPlugin implements Listener {
             }
 
             Inventory gui = getServer().createInventory(null, 54, ChatColor.LIGHT_PURPLE + "CrazyLogger Page " + page);
-
             int startIndex = (page - 1) * pageSize;
             int endIndex = startIndex + pageSize;
             int currentIndex = 0;
@@ -146,12 +145,12 @@ public class CrazyLogger extends JavaPlugin implements Listener {
             }
 
             // Add navigation items. Will figure this out later
-            if (page > 1) {
-                // Previous page shit here
-            }
-            if (page < totalPages) {
+            //if (page > 1) {
+               // Previous page shit here
+            //}
+            //if (page < totalPages) {
                 // Work on the next page shit here
-            }
+            //}
 
             sender.sendMessage(ChatColor.BLUE + playerName + "'s Data - Page " + page + " of " + totalPages);
             ((Player) sender).openInventory(gui);
