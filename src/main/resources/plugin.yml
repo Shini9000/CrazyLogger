@@ -1,0 +1,23 @@
+name: CrazyLogger
+version: '1.0'
+main: me.shini9000.crazyLogger.CrazyLogger
+api-version: '1.21'
+prefix: [ ABMC CC Logger ]
+load: STARTUP
+authors: [ Shini9000 ]
+description: ABMC CrazyCrates Logger (ReWrite of MasterGabeMods logger)
+website: https://github.com/Shini9000
+depend: [CrazyCrates]
+
+commands:
+  crazylogger:
+    description: lookup cmd
+    usuage: /<command>
+
+permissions:
+  crazylogger.lookup:
+    description: Allows lookup
+    default: op
+  crazylogger.exempt:
+    description: Exempt from logging
+    default: op
