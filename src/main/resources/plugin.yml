@@ -1,5 +1,5 @@
 name: CrazyLogger
-version: '1.0'
+version: '1.1'
 main: me.shini9000.crazyLogger.CrazyLogger
 api-version: '1.21'
 prefix: [ ABMC CC Logger ]

@@ -47,6 +47,7 @@ public class CrazyLogger extends JavaPlugin implements Listener {
                 ItemStack coal = new ItemStack(Material.COAL, 1);
                 gui2.addItem(coal);
                 e.getWhoClicked().openInventory(gui2);
+                e.setCancelled(true);
 
                 counter = 0;
                 Player player = (Player) e.getWhoClicked();
