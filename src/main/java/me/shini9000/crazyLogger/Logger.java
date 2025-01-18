@@ -1,5 +1,6 @@
 package me.shini9000.crazyLogger;
 import com.badbones69.crazycrates.api.events.PlayerPrizeEvent;
+import com.badbones69.crazycrates.api.objects.Crate;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -17,7 +18,7 @@ public class Logger implements Listener {
     public void prizeLogger(PlayerPrizeEvent e) {
         String p = e.getPlayer().getName().toLowerCase();
         String crate = e.getCrateName();
-        String prize = e.getPrize().getDisplayItem(e.getCrate()).getItemMeta().getDisplayName();
+        String prize = e.getPrize().getDisplayItem(new Crate(crate)).getItemMeta().getDisplayName() ;
 
         if (e.getPlayer().isOp() || e.getPlayer().hasPermission("crazylogger.exempt")) {
         } else {

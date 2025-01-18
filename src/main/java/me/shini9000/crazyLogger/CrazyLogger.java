@@ -146,10 +146,10 @@ public class CrazyLogger extends JavaPlugin implements Listener {
 
             // Add navigation items. Will figure this out later
             //if (page > 1) {
-               // Previous page shit here
+            // Previous page shit here
             //}
             //if (page < totalPages) {
-                // Work on the next page shit here
+            // Work on the next page shit here
             //}
 
             sender.sendMessage(ChatColor.BLUE + playerName + "'s Data - Page " + page + " of " + totalPages);
